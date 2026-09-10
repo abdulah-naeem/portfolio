@@ -298,6 +298,7 @@
           btn.innerText = 'Sending...';
           
           const formData = new FormData(form);
+          formData.append('form-name', 'contact'); // Explicitly tell Netlify which form this is
           
           fetch('/', {
             method: 'POST',
