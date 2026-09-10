@@ -7,7 +7,7 @@
   /* Color System */
   --bg-primary: #F8FAFC;      /* Slate 50: Soft canvas background */
   --text-primary: #0F172A;    /* Slate 900: High-contrast primary text */
-  --text-muted: #64748B;      /* Slate 500: Secondary descriptive text */
+  --text-muted: #475569;      /* Slate 600: Secondary descriptive text (darkened for contrast) */
   --brand-primary: #1E293B;   /* Deep Slate: Structural elements, cards, buttons */
   --brand-hover: #334155;     /* Slate 700: Hover state */
   --accent-color: #2563EB;    /* Sapphire Blue: Active states & key accents */
@@ -152,6 +152,8 @@ a:hover {
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.2s ease;
+  padding: 8px 12px;
+  display: inline-block;
 }
 
 .nav-links a:hover {
@@ -279,6 +281,7 @@ a:hover {
 
 .btn-primary {
   display: inline-flex;
+  min-height: 44px;
   align-items: center;
   gap: 8px;
   background-color: var(--brand-primary);
@@ -303,6 +306,7 @@ a:hover {
 
 .btn-secondary {
   display: inline-flex;
+  min-height: 44px;
   align-items: center;
   gap: 8px;
   background-color: transparent;
@@ -602,6 +606,7 @@ a:hover {
   width: 100%;
   cursor: pointer;
   border: none;
+  min-height: 44px;
 }
 
 /* Footer */
@@ -676,6 +681,12 @@ a:hover {
 }
 
 @media (max-width: 640px) {
+  .hero-section {
+    padding: 48px 0 32px;
+  }
+  .contact-card, .about-card, .case-card, .capstone-card {
+    padding: 24px;
+  }
   .hero-title {
     font-size: 1.85rem;
   }
