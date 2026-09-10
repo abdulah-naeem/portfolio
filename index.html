@@ -221,7 +221,7 @@
           <h2>Get in Touch</h2>
           <p>Interested in collaborating or have a question about my work? Send a message directly to my inbox.</p>
           
-          <form name="contact" method="POST" data-netlify="true" action="/" class="contact-form">
+          <form id="contact-form" name="contact" method="POST" data-netlify="true" action="/" class="contact-form">
             <div class="form-group">
               <label for="name">Name</label>
               <input type="text" id="name" name="name" required placeholder="Jane Doe" />
@@ -284,5 +284,43 @@
     });
   </script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contact-form');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault(); // Prevent standard browser redirect
+          
+          const btn = form.querySelector('button[type="submit"]');
+          if (btn.disabled) return; // Prevent double click
+          
+          btn.disabled = true;
+          btn.innerText = 'Sending...';
+          
+          const formData = new FormData(form);
+          
+          fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString()
+          })
+          .then(response => {
+            if (response.ok) {
+              btn.innerText = 'Message Sent!';
+              form.reset();
+            } else {
+              throw new Error('Network response was not ok');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            btn.disabled = false;
+            btn.innerText = 'Try Again';
+            alert('Something went wrong. Please try again.');
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>
