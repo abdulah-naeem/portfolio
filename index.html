@@ -221,7 +221,7 @@
           <h2>Get in Touch</h2>
           <p>Interested in collaborating or have a question about my work? Send a message directly to my inbox.</p>
           
-          <form name="contact" method="POST" data-netlify="true" action="/" class="contact-form" onsubmit="if(this.dataset.submitted) return false; this.dataset.submitted='true'; var btn = this.querySelector('button'); setTimeout(function(){ btn.disabled=true; btn.innerText='Sending...'; }, 50);">
+          <form name="contact" method="POST" data-netlify="true" action="/" class="contact-form">
             <div class="form-group">
               <label for="name">Name</label>
               <input type="text" id="name" name="name" required placeholder="Jane Doe" />
@@ -284,5 +284,27 @@
     });
   </script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const contactForm = document.querySelector('form[name="contact"]');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          if (contactForm.dataset.submitted) {
+            e.preventDefault();
+            return;
+          }
+          contactForm.dataset.submitted = 'true';
+          const btn = contactForm.querySelector('button[type="submit"]');
+          if (btn) {
+            // Slight delay ensures the browser's native submit fires before we disable the button
+            setTimeout(() => {
+              btn.disabled = true;
+              btn.innerText = 'Sending...';
+            }, 50);
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
